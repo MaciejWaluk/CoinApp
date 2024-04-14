@@ -1,0 +1,26 @@
+<div class="m-3 p-4 rounded rounded-2 shadow">
+  <h3>{{ coin.name }}</h3>
+  <h5 class="fw-normal mb-4">{{ coin.symbol }}</h5>
+  <p><span class="fw-bold">Price: </span>{{ priceData }}</p>
+  <p>
+    <span class="fw-bold">Circulating supply: </span
+    >{{ coin.circulatingSupply }}
+  </p>
+  <p><span class="fw-bold">Total supply: </span>{{ coin.totalSupply }}</p>
+  <div class="d-flex buttons gap-2">
+    <button class="btn btn-outline-dark" (click)="getPrice()">
+      Get price
+    </button>
+    <button
+      class="btn btn-outline-dark"
+      data-bs-toggle="modal"
+      data-bs-target="#exampleModal"
+      (click)="editCoin()"
+    >
+      Edit
+    </button>
+    <button class="btn btn-outline-danger" (click)="removeCoin()">
+      Delete
+    </button>
+  </div>
+</div>

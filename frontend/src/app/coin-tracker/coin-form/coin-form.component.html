@@ -1,0 +1,136 @@
+<form [formGroup]="coinForm" (ngSubmit)="$event.preventDefault(); handleForm()">
+  <div class="mb-3">
+    <label for="coinName" class="form-label">Name</label>
+    <input
+      type="text"
+      formControlName="coinName"
+      class="form-control"
+      id="coinName"
+    />
+    <div
+      *ngIf="
+        coinForm.get('coinName')?.invalid &&
+        (coinForm.get('coinName')?.dirty || coinForm.get('coinName')?.touched)
+      "
+    >
+      <small class="text-danger">This field is required</small>
+    </div>
+  </div>
+  <div class="mb-3">
+    <label for="coinSymbol" class="form-label">Symbol</label>
+    <input
+      type="text"
+      formControlName="coinSymbol"
+      class="form-control"
+      id="coinSymbol"
+      oninput="this.value = this.value.toUpperCase()"
+    />
+    <div
+      *ngIf="
+        coinForm.get('coinSymbol')?.invalid &&
+        (coinForm.get('coinSymbol')?.dirty ||
+          coinForm.get('coinSymbol')?.touched)
+      "
+    >
+      <small class="text-danger">This field is required</small>
+    </div>
+  </div>
+  <div class="mb-3">
+    <label for="circulatingSupply" class="form-label">Circulating supply</label>
+    <input
+      type="number"
+      formControlName="coinCirulatingSupply"
+      class="form-control"
+      id="circulatingSupply"
+    />
+    <div
+      *ngIf="
+        coinForm.get('coinCirulatingSupply')?.invalid &&
+        (coinForm.get('coinCirulatingSupply')?.dirty ||
+          coinForm.get('coinCirulatingSupply')?.touched)
+      "
+    >
+      <small
+        class="text-danger"
+        *ngIf="coinForm.get('coinCirulatingSupply')?.hasError('required')"
+        >This field is required</small
+      >
+      <small
+        class="text-danger"
+        *ngIf="coinForm.get('coinCirulatingSupply')?.hasError('min')"
+        >Circulating supply cannot be a negative number<br
+      /></small>
+      <small
+        class="text-danger"
+        *ngIf="
+          coinForm
+            .get('coinCirulatingSupply')
+            ?.hasError('invalidCirculatingSupply')
+        "
+        >Total supply cannot be a smaller than current supply</small
+      >
+    </div>
+  </div>
+  <div class="mb-3">
+    <label for="totalSupply" class="form-label">Total supply</label>
+    <input
+      type="number"
+      formControlName="coinTotalSupply"
+      class="form-control"
+      id="totalSupply"
+    />
+    <div
+      *ngIf="
+        coinForm.get('coinTotalSupply')?.invalid &&
+        (coinForm.get('coinTotalSupply')?.dirty ||
+          coinForm.get('coinTotalSupply')?.touched)
+      "
+    >
+      <small
+        class="text-danger"
+        *ngIf="coinForm.get('coinTotalSupply')?.hasError('required')"
+        >This field is required</small
+      >
+      <small
+        class="text-danger"
+        *ngIf="coinForm.get('coinTotalSupply')?.hasError('min')"
+        >Total supply cannot be a negative number <br
+      /></small>
+      <small
+        class="text-danger"
+        *ngIf="
+          coinForm.get('coinTotalSupply')?.hasError('invalidCirculatingSupply')
+        "
+        >Total supply cannot be a smaller than current supply</small
+      >
+    </div>
+    <small class="text-dark mt-3" *ngIf="existsButtonClicked">{{
+      coinExistsMessage
+    }}</small>
+  </div>
+  <div class="d-flex gap-2 justify-content-end">
+    <button
+      type="submit"
+      class="btn btn-outline-dark btn-sm"
+      data-bs-dismiss="modal"
+      [disabled]="coinForm.invalid"
+    >
+      {{ coin ? "Update coin" : "Add coin" }}
+    </button>
+    <button
+      type="button"
+      class="btn btn-outline-dark btn-sm"
+      (click)="ifCoinExists()"
+    >
+      Check if token exists (via symbol)
+    </button>
+    <button
+      type="button"
+      class="btn btn-outline-dark btn-sm"
+      data-bs-dismiss="modal"
+      (click)="editCancelClicked()"
+    >
+      Close
+    </button>
+  </div>
+</form>
