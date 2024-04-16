@@ -2,14 +2,15 @@ package com.mw.backend.controller;
 
 import com.mw.backend.service.CryptocurrencyService;
 import com.mw.backend.viewmodel.CryptocurrencyViewmodel;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.UUID;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/api/Cryptocurrencies")
 public class CryptocurrencyController {
 
@@ -38,19 +39,20 @@ public class CryptocurrencyController {
         return cryptocurrencyService.addCryptocurrency(cvm);
     }
 
-    @PutMapping
+    @PutMapping("/{id}")
     public CryptocurrencyViewmodel updateCryptocurrency(
+            @PathVariable UUID id,
             @RequestBody CryptocurrencyViewmodel cvm
     ) {
-        return cryptocurrencyService.updateCryptocurrency(cvm);
+        return cryptocurrencyService.updateCryptocurrency(id, cvm);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteCryptocurrency(
+    @ResponseStatus(value = HttpStatus.OK)
+    public void deleteCryptocurrency(
             @PathVariable UUID id
     ) {
         cryptocurrencyService.deleteCryptocurrency(id);
-        return ResponseEntity.ok("Cryptocurrency deleted");
     }
 
     @ExceptionHandler(RuntimeException.class)

@@ -12,17 +12,27 @@ public class CryptocurrencyMapper {
                 c.getId(),
                 c.getName(),
                 c.getSymbol(),
-                c.getCirculating_supply(),
-                c.getTotal_supply()
+                c.getCirculatingSupply(),
+                c.getTotalSupply()
         );
     }
 
-    public Cryptocurrency mapToEntity(CryptocurrencyViewmodel cvm) {
+    public Cryptocurrency mapToEntityCreated(CryptocurrencyViewmodel cvm) {
         return new Cryptocurrency(
                 cvm.name(),
                 cvm.symbol(),
-                cvm.circulating_supply(),
-                cvm.total_supply()
+                cvm.circulatingSupply(),
+                cvm.totalSupply()
+        );
+    }
+
+    public Cryptocurrency mapToEntityUpdated(CryptocurrencyViewmodel cvm) {
+        return new Cryptocurrency(
+                cvm.id(),
+                cvm.name(),
+                cvm.symbol(),
+                cvm.circulatingSupply(),
+                cvm.totalSupply()
         );
     }
 }

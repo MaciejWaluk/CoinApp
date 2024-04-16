@@ -11,7 +11,7 @@ public record CryptocurrencyViewmodel(
         UUID id,
         @NotBlank String name,
         @NotBlank String symbol,
-        @NotNull @PositiveOrZero long circulating_supply,
-        @NotNull @Positive long total_supply
+        @NotNull @PositiveOrZero long circulatingSupply,
+        @NotNull @Positive long totalSupply
 ) {
 }
