@@ -79,6 +79,7 @@ export class CoinFormComponent {
         .updateCryptocurrency(id, updatedCoin)
         .subscribe((data: any) => {
           this.coinUpdated.emit(data);
+          console.log(data);
         });
     } else {
       console.error('Invalid circulatingSupply or totalSupply value.');
@@ -86,7 +87,7 @@ export class CoinFormComponent {
   }
 
   addNewCoin() {
-    const id = 0;
+    const id = "00000000-0000-0000-0000-000000000000";
     const name = this.coinForm.get('coinName')!.value as string;
     const symbol = this.coinForm.get('coinSymbol')!.value as string;
     const circulatingSupplyValue = this.coinForm.get(

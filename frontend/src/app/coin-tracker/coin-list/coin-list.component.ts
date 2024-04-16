@@ -18,6 +18,7 @@ export class CoinListComponent implements OnInit {
   ngOnInit(): void {
     this.coinService.getCryptocurrencies().subscribe((data: any) => {
       this.cryptocurrencies = data;
+      console.log(data);
     });
   }
 

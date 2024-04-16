@@ -19,26 +19,26 @@ export class CoinService {
   };
 
   public getCryptocurrencies() {
-    return this.http.get(`${this.baseUrl}/Cryptocurrencies`);
+    return this.http.get(`${this.baseUrl}`);
   }
 
   public getCryptocurrency(id: number) {
-    return this.http.get(`${this.baseUrl}/Cryptocurrencies/${id}`);
+    return this.http.get(`${this.baseUrl}/${id}`);
   }
 
   public createCryptocurrency(cryptocurrency: any) {
-    return this.http.post(`${this.baseUrl}/Cryptocurrencies`, cryptocurrency);
+    return this.http.post(`${this.baseUrl}`, cryptocurrency);
   }
 
-  public updateCryptocurrency(id: number, cryptocurrency: any) {
+  public updateCryptocurrency(id: string, cryptocurrency: any) {
     return this.http.put(
-      `${this.baseUrl}/Cryptocurrencies/${id}`,
+      `${this.baseUrl}/${id}`,
       cryptocurrency
     );
   }
 
-  public deleteCryptocurrency(id: number) {
-    return this.http.delete(`${this.baseUrl}/Cryptocurrencies/${id}`);
+  public deleteCryptocurrency(id: string) {
+    return this.http.delete(`${this.baseUrl}/${id}`);
   }
 
   public getPrice(symbol: string, currency: string) {
