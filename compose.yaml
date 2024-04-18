@@ -28,9 +28,9 @@ services:
     depends_on:
       - db
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/coin-app-db
-      - SPRING_DATASOURCE_USERNAME=admin
-      - SPRING_DATASOURCE_PASSWORD=admin
+      - SPRING_DATASOURCE_URL=postgres://coin_app_db_user:84bXznO8LdEC0lG0HhqhRk2MKn3XcyWq@dpg-cogopii1hbls7389tr4g-a.frankfurt-postgres.render.com/coin_app_db
+      - SPRING_DATASOURCE_USERNAME=coin_app_db_user
+      - SPRING_DATASOURCE_PASSWORD=84bXznO8LdEC0lG0HhqhRk2MKn3XcyWq
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
     ports:
       - '7133:7133'
