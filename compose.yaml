@@ -1,0 +1,54 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: frontend
+    ports:
+      - "80:80"
+    expose:
+      - "80"
+    environment:
+      - BASE_URL=http://backend:7133/api/Cryptocurrencies
+      - COIN_API_URL=https://rest.coinapi.io/v1/exchangerate
+      - COIN_API_KEY=C8474A28-30DA-45C6-B747-8AF03328BD4D
+    depends_on:
+      - backend
+    networks:
+      - app-network
+
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: backend
+    depends_on:
+      - db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/coin-app-db
+      - SPRING_DATASOURCE_USERNAME=admin
+      - SPRING_DATASOURCE_PASSWORD=admin
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+    ports:
+      - '7133:7133'
+    networks:
+      - app-network
+
+
+  db:
+    image: postgres:latest
+    container_name: db
+    restart: always
+    environment:
+      POSTGRES_DB: coin-app-db
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
