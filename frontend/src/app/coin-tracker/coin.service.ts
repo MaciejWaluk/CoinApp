@@ -19,10 +19,11 @@ export class CoinService {
   };
 
   public getCryptocurrencies() {
+    console.log("baseUrl: ", this.baseUrl)
     return this.http.get(`${this.baseUrl}`);
   }
 
-  public getCryptocurrency(id: number) {
+  public getCryptocurrency(id: string) {
     return this.http.get(`${this.baseUrl}/${id}`);
   }
 
