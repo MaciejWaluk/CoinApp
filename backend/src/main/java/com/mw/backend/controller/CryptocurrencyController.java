@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@CrossOrigin(origins = "http://localhost")
+@CrossOrigin
 @RequestMapping("/api/Cryptocurrencies")
 public class CryptocurrencyController {
 
